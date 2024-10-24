@@ -1,14 +1,4 @@
 import typing, random, time, math
-# Dataset with:
-#   
-
-
-
-# Evaluation:
-#   Ratios
-#   Taste profile of ingredients
-#   Roles of ingredients (binder, enhancer, etc...)
-#   
 
 # TODO Augment
 TASTES: list[str] = [
@@ -19,6 +9,7 @@ TASTES: list[str] = [
     "herby",  
 ] 
 
+# TODO Augment
 INGREDIENT_FUNCTION: list[str] = [
     "base",
     "binder",
@@ -41,7 +32,7 @@ class Ingredient:
             moistness:  float = -1,
             taste_type: str = "",
             function_:  str = "",
-            power:      float = -1,
+            intensity:      float = -1,
         ):
 
         self.name: str = name
@@ -50,7 +41,7 @@ class Ingredient:
         self.moistness: float = moistness   # Desert - [0:100] - Ocean
         self.taste_type: str = taste_type   # Salty, bitter, etc...
         self.function_: str = function_     # Function of ingredient
-        self.power: float = power           # Weak taste - [0:100] - Strong taste
+        self.intensity: float = intensity           # Weak taste - [0:100] - Strong taste
 
 
     def mutate(self, delta: float = 1):
@@ -66,7 +57,6 @@ class Recipe:
     """
     Class that represents a cookie recipe.
     """
-
     # Ingredient mutation types
     mut_type = {"add", "del", "mut"}
 
@@ -87,6 +77,9 @@ class Recipe:
 
 
     def mutate(self, db: list[Ingredient], mutation_rate: float = 0.8):
+        """
+        
+        """
         # Are we going to mutate?
         r: float = random.random()
         if r < mutation_rate:
@@ -125,6 +118,7 @@ class Recipe:
         
         """
         moistness = -1      # Desert - [0:100] - Ocean
+        # TODO Calc moistness from ingredients
         return moistness
 
 
@@ -140,6 +134,12 @@ class Recipe:
         
         """
         ret = -1
+        # TODO Calculate fitness score
+        # Base it on:
+        # Moistness
+        # Good distribution of types (base, enhancer, binder, etc)
+        # Cohesian of ingredient tastes according to recipe target taste
+        # Quantity of ingredient paired with the ingredient's intensity
         return ret
 
 
@@ -151,8 +151,22 @@ class GA:
         """
         
         """
-
         self.population: list[Recipe] = []
+
+
+    def _init_population(self, population_size: int):
+        """
+        
+        """
+        population: list[Recipe] = []
+
+        for _ in range(population_size):
+            recipe_size = random.gauss(4, 0.75)     # TODO tweak
+            ingredients = [random.sample(self.database) for _ in range(recipe_size)]
+            child = Recipe(ingredients)
+            population.append(child)
+
+        return population
 
     def _selection(
             self, 
@@ -160,13 +174,13 @@ class GA:
             selection_size: int,
         ) -> list[Recipe]:
         """
-        
-        """
 
-        # TODO do we need ascending or decending????
+        """
+        # TODO Do we need ascending or decending????
         evals = [(recipe.evaluate() , recipe) for recipe in population]
         evals.sort(key=lambda tup: tup[0], reverse=True)
         return evals[:selection_size]
+
 
     def _crossover(
             self, 
@@ -218,14 +232,14 @@ class GA:
     def _mutation(
             self, 
             population: list[Recipe], 
-            db: list[Recipe],
+            # db: list[Recipe],
             mutation_rate: float = 0.8
         ) -> None:
         """
         
         """
         for recipe in population:
-            recipe.mutate(db, mutation_rate)
+            recipe.mutate(self.database, mutation_rate)
         
 
 
@@ -233,13 +247,15 @@ class GA:
         """
         
         """
-
+        # TODO Normalize recipe to total to 1 kg of ingredients
+        raise Exception("Normalization not yet implemented...")
+        return None
         
     def run(
             self, 
             epochs: int = 100,
-            pop_size: int = 20,
-            sel_size: int = 10,
+            population_size: int = 20,
+            selection_size: int = 10,
             mut_delta: float = 1,
         ) -> list[Recipe]:
         """
@@ -247,8 +263,8 @@ class GA:
         """
         # TODO is mut_delta needed???
         print(
-            f"Starting GA with: {epochs} epochs, {pop_size} individuals, " \
-            f"{sel_size} selected, delta: {mut_delta}."
+            f"Starting GA with: {epochs} epochs, {population_size} recipes, " \
+            f"{selection_size} selected, delta: {mut_delta}."
         )
 
         # Timers
@@ -256,14 +272,18 @@ class GA:
         epoch_time = start_time
 
         # Initialize population
-        population = ...
+        population = self._init_population(population_size)
 
         # Run algorithm
         for i in range(epochs):
             # TODO Select
+            population = self._selection(population, selection_size)
             # TODO Crossover
+            population = self._crossover(population, pop_size)
             # TODO Mutation
+            self._mutation(population)
             # TODO Normalization
+            self._normalize(population)
 
             if i % 10 == 0:
                 new_time = time.time()
@@ -272,11 +292,15 @@ class GA:
                     f"Total time taken: {new_time - start_time}"
                 )
                 epoch_time = new_time
+
         
         print(
             f"\nFinished:\n\tTotal time taken: {time.time() - start_time}\t" \
             f"Number of epochs: {epochs}"
         )
+
+        # Select final recipes
+        return self._selection(population, population_size)
 
 
 def main():
@@ -285,8 +309,8 @@ def main():
 
     # Parameters that tune the genetic algorithm
     num_ingredients = 6
-    population_size = 20    # Amount of created children each epoch
-    selection_size  = 10    # Amount of selected children to advance
+    population_size = 20    # Amount of created children each epoch (>2)
+    selection_size  = 10    # Amount of selected children to advance (>2)
     mut_delta  = 1          # TODO Not sure if needed
 
     ga = GA(dataset, population_size, selection_size, mutation_delta)
