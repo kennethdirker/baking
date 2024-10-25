@@ -48,6 +48,7 @@ class Ingredient:
         """
         
         """
+        # TODO test
         random_factor = random.gauss(1, 0.05)    # TODO experiment with standard deviation
         self.quantity = self.quantity ** random_factor
         
@@ -80,6 +81,7 @@ class Recipe:
         """
         
         """
+        # TODO test
         # Are we going to mutate?
         r: float = random.random()
         if r < mutation_rate:
@@ -90,10 +92,10 @@ class Recipe:
 
         # Perform addition
         if mut_type is "add":
-            self.ingredients.append(ingredient)
+            self.ingredients.append(random.choice(db))
             
         # Perform deletion
-        elif muyt_type is "del":
+        elif mut_type is "del":
             size = len(self.ingredients)
             if size > 0:
                 self.ingredients.pop(random.randint(0, size - 1))
@@ -101,7 +103,7 @@ class Recipe:
         # Perform point mutation on features
         elif mut_type is "mut":            
             # Decide amount of mutations to do
-            mutations = random.gauss(0, 3)
+            mutations = random.gauss(0, 3)      # TODO tweak OR why not just do 1!
             mutations: int = abs(math.ceil(r))
             size = len(self.ingredients)
             if mutations > size:
@@ -117,6 +119,7 @@ class Recipe:
         """
         
         """
+        # TODO test
         moistness = -1      # Desert - [0:100] - Ocean
         # TODO Calc moistness from ingredients
         return moistness
@@ -127,12 +130,30 @@ class Recipe:
         
         """
         return len(self.ingredients)
+    
+
+    def _normalize(self) -> None:
+        """
+        
+        """
+        # TODO test
+        # NOTE: Assumes that all measures are in grams/milliliters!!!!
+        # Calculate total mass of recipe
+        sum: float = 0      # In grams/milliliters
+        for ingredient in self.ingredients:
+            sum += ingredient.quantity
+
+        # Scale ingredients to match "1000 g" of mass
+        for ingredient in self.ingredients:
+            ingredient.quantity = (1000 * ingredient.quantity) / sum 
+            
 
 
     def evaluate(self) -> float:
         """
         
         """
+        # TODO test
         ret = -1
         # TODO Calculate fitness score
         # Base it on:
@@ -158,6 +179,7 @@ class GA:
         """
         
         """
+        # TODO test
         population: list[Recipe] = []
 
         for _ in range(population_size):
@@ -176,6 +198,7 @@ class GA:
         """
 
         """
+        # TODO test
         # TODO Do we need ascending or decending????
         evals = [(recipe.evaluate() , recipe) for recipe in population]
         evals.sort(key=lambda tup: tup[0], reverse=True)
@@ -190,6 +213,7 @@ class GA:
         """
         
         """
+        # TODO test
         children: list[Recipe] = []
 
         for _ in range(pop_size):
@@ -214,13 +238,13 @@ class GA:
                 big_len   = len1
 
             # Select ingredients
-            ingredients = ingredients[0:new_len-1]
+            ingredients = ingredients[0 : small_len - 1]
             
             r = random.random()
             if r > small_len / big_len:
-                taste = parents[len2_dom].target_taste()
+                taste = parents[dom].target_taste
             else:
-                taste = parents[len2_dom].target_taste()
+                taste = parents[dom].target_taste
 
             # Create child
             child = Recipe(ingredients, taste)
@@ -243,13 +267,13 @@ class GA:
         
 
 
-    def _normalize(self):
+    def _normalize(self, population: list[Recipe]) -> None:
         """
         
         """
-        # TODO Normalize recipe to total to 1 kg of ingredients
-        raise Exception("Normalization not yet implemented...")
-        return None
+        # TODO test
+        for recipe in population:
+            recipe._normalize()
         
     def run(
             self, 
@@ -261,6 +285,7 @@ class GA:
         """
         
         """
+        # TODO test
         # TODO is mut_delta needed???
         print(
             f"Starting GA with: {epochs} epochs, {population_size} recipes, " \
@@ -276,13 +301,9 @@ class GA:
 
         # Run algorithm
         for i in range(epochs):
-            # TODO Select
             population = self._selection(population, selection_size)
-            # TODO Crossover
-            population = self._crossover(population, pop_size)
-            # TODO Mutation
+            population = self._crossover(population, population_size)
             self._mutation(population)
-            # TODO Normalization
             self._normalize(population)
 
             if i % 10 == 0:
@@ -311,7 +332,7 @@ def main():
     num_ingredients = 6
     population_size = 20    # Amount of created children each epoch (>2)
     selection_size  = 10    # Amount of selected children to advance (>2)
-    mut_delta  = 1          # TODO Not sure if needed
+    mutation_delta  = 1          # TODO Not sure if needed
 
     ga = GA(dataset, population_size, selection_size, mutation_delta)
 
