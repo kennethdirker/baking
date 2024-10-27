@@ -50,6 +50,7 @@ class Ingredient:
         """
         
         """
+        # TODO test
         random_factor = random.gauss(1, 0.05)    # TODO experiment with standard deviation
         self.quantity = self.quantity ** random_factor
         
@@ -88,6 +89,7 @@ class Recipe:
         """
         
         """
+        # TODO test
         # Are we going to mutate?
         r: float = random.random()
         if r < mutation_rate:
@@ -109,7 +111,7 @@ class Recipe:
         # Perform point mutation on features
         elif mut_type == "mut":            
             # Decide amount of mutations to do
-            mutations = random.gauss(0, 3)
+            mutations = random.gauss(0, 3)      # TODO tweak OR why not just do 1!
             mutations: int = abs(math.ceil(r))
             # size = len(self.ingredients)
             # if mutations > size:
@@ -140,6 +142,23 @@ class Recipe:
         
         """
         return len(self.ingredients)
+    
+
+    def _normalize(self) -> None:
+        """
+        
+        """
+        # TODO test
+        # NOTE: Assumes that all measures are in grams/milliliters!!!!
+        # Calculate total mass of recipe
+        sum: float = 0      # In grams/milliliters
+        for ingredient in self.ingredients:
+            sum += ingredient.quantity
+
+        # Scale ingredients to match "1000 g" of mass
+        for ingredient in self.ingredients:
+            ingredient.quantity = (1000 * ingredient.quantity) / sum 
+            
 
 
     def evaluate(self) -> float:
@@ -174,7 +193,8 @@ class GA:
         """
         
         """
-        population: List[Recipe] = []
+        # TODO test
+        population: list[Recipe] = []
 
         for _ in range(population_size):
             recipe_size = random.gauss(4, 0.75)     # TODO tweak
@@ -193,6 +213,7 @@ class GA:
         """
 
         """
+        # TODO test
         # TODO Do we need ascending or decending????
         evals = [(recipe.evaluate() , recipe) for recipe in population]
         evals.sort(key=lambda tup: tup[0], reverse=False)
@@ -207,7 +228,8 @@ class GA:
         """
         
         """
-        children: List[Recipe] = []
+        # TODO test
+        children: list[Recipe] = []
 
         for _ in range(population_size):
             # Sample recipes to combine
@@ -233,7 +255,7 @@ class GA:
                 big_len   = len1
 
             # Select ingredients
-            ingredients = ingredients[0:small_len-1]
+            ingredients = ingredients[0 : small_len - 1]
             
             r = random.random()
             if r > small_len / big_len:
@@ -261,13 +283,14 @@ class GA:
             recipe.mutate(self.database, mutation_rate)
         
 
-    def _normalize(self):
+
+    def _normalize(self, population: list[Recipe]) -> None:
         """
         
         """
-        # TODO Normalize recipe to total to 1 kg of ingredients
-        raise Exception("Normalization not yet implemented...")
-        return None
+        # TODO test
+        for recipe in population:
+            recipe._normalize()
         
 
     def run(
@@ -280,6 +303,7 @@ class GA:
         """
         
         """
+        # TODO test
         # TODO is mut_delta needed???
         print(
             f"Starting GA with: {epochs} epochs, {population_size} recipes, " \
