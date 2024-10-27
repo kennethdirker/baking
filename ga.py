@@ -52,8 +52,7 @@ class Ingredient:
         """
         # TODO test
         random_factor = random.gauss(1, 0.05)    # TODO experiment with standard deviation
-        self.quantity = self.quantity ** random_factor
-        
+        self.quantity = self.quantity ** random_factor        
 
 
 class Recipe:
@@ -100,12 +99,23 @@ class Recipe:
 
         # Perform addition
         if mut_type == "add":
+            done = False
+            while not done:
+                
+                # Check for duplicate ingredient
+                to_add = random.choice(db)
+                done = True
+                for i in self.ingredients:
+                    if to_add.name == i.name:
+                        done = False
+                    
+                
             self.ingredients.append(random.choice(db))
             
         # Perform deletion
         elif mut_type == "del":
             size = len(self.ingredients)
-            if size > 0:
+            if size > 1:
                 self.ingredients.pop(random.randint(0, size - 1))
 
         # Perform point mutation on features
@@ -118,10 +128,10 @@ class Recipe:
                 # mutations = size
 
             # Decide which ingredients to mutate and execute
-            mutants = random.sample(self.ingredients, max(mutations, len(self.ingredients)))
+            mutants = random.sample(self.ingredients, min(mutations, len(self.ingredients)))
 
             for i in mutants:
-                self.ingredients[i].mutate()
+                i.mutate()
 
 
     def _moistness(self) -> float:
@@ -233,35 +243,28 @@ class GA:
 
         for _ in range(population_size):
             # Sample recipes to combine
-            recipes: List[Recipe] = random.sample(population, 2)
-            recipe1: Recipe = recipes[0]
-            recipe2: Recipe = recipes[1]
+            recipe1, recipe2 = random.sample(population, 2)
             ingredients: List[Ingredient] = recipe1.ingredients + recipe2.ingredients
             random.shuffle(ingredients)
 
             # Decide amount of ingredients of child
-            len1 = recipe1.length()
-            len2 = recipe2.length()
-            parents: List[Recipe] = [recipe1, recipe2]
-            dom = 0        # Flag indicating the bigger recipe
-
-            r = random.random()
-            if r > 0.5:
-                dom = 1
-                small_len = len1
-                big_len   = len2
-            else:
-                small_len = len2
-                big_len   = len1
+            small = min(recipe1.length(), recipe2.length())
+            large = max(recipe1.length(), recipe2.length())
+            num_ingredients = random.randint(small, large)
 
             # Select ingredients
-            ingredients = ingredients[0 : small_len - 1]
+            ingredients = ingredients[0 : num_ingredients]
             
-            r = random.random()
-            if r > small_len / big_len:
-                taste = parents[dom].target_taste
+            # Select taste target
+            # r = random.random()
+            # if r > small_len / big_len:
+            #     taste = parents[dom - 1].target_taste
+            # else:
+            #     taste = parents[dom - 1].target_taste
+            if random.random() > 0.5:
+                taste = recipe1.target_taste
             else:
-                taste = parents[dom].target_taste
+                taste = recipe2.target_taste
 
             # Create child
             child = Recipe(ingredients, taste)
