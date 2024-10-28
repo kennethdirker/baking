@@ -25,7 +25,7 @@ class Ingredient:
     
     """
     def __str__(self):
-        return f"{self.name}, {self.quantity} {self.unit}, {self.moistness}, {self.taste}, {self.function_}, {self.intensity}"
+        return f"{self.name}, {float(self.quantity):.4} {self.unit}, {self.moistness}, {self.taste}, {self.function_}, {self.intensity}"
 
     def __init__(
             self,
@@ -82,6 +82,34 @@ class Recipe:
         else:
             self.target_taste: str = random.choice(TASTES)
 
+
+    def merge_ingredients(self):
+        """
+        
+        """
+        d = {}
+        merged_ingredients = []
+        
+        # Merge ingredients in dict
+        for i in self.ingredients:
+            if i.name in d:
+                d[i.name].quantity += i.quantity
+            else:
+                d[i.name] = Ingredient(
+                    i.name, 
+                    i.quantity,
+                    i.unit,
+                    i.moistness,
+                    i.taste,
+                    i.function_,
+                    i.intensity
+                )
+
+        # Create new list of ingredients
+        for value in d.values():
+            merged_ingredients.append(value)
+        
+        self.ingredients = merged_ingredients
 
 
     def mutate(self, db: List[Ingredient], mutation_rate: float = 0.8):
@@ -154,20 +182,24 @@ class Recipe:
         return len(self.ingredients)
     
 
-    def _normalize(self) -> None:
+    def normalize(self) -> None:
         """
         
         """
         # TODO test
         # NOTE: Assumes that all measures are in grams/milliliters!!!!
         # Calculate total mass of recipe
-        sum: float = 0      # In grams/milliliters
+        sum_: float = 0      # In grams/milliliters
         for ingredient in self.ingredients:
-            sum += ingredient.quantity
+            sum_ += ingredient.quantity
 
         # Scale ingredients to match "1000 g" of mass
         for ingredient in self.ingredients:
-            ingredient.quantity = (1000 * ingredient.quantity) / sum 
+            ingredient.quantity = (1000 * ingredient.quantity) / sum_ 
+
+
+    def sort(self):
+        self.ingredients.sort(key = lambda ingredient: ingredient.name)
             
 
 
@@ -256,11 +288,6 @@ class GA:
             ingredients = ingredients[0 : num_ingredients]
             
             # Select taste target
-            # r = random.random()
-            # if r > small_len / big_len:
-            #     taste = parents[dom - 1].target_taste
-            # else:
-            #     taste = parents[dom - 1].target_taste
             if random.random() > 0.5:
                 taste = recipe1.target_taste
             else:
@@ -273,10 +300,9 @@ class GA:
         return children
 
 
-    def _mutation(
+    def mutation(
             self, 
             population: List[Recipe], 
-            # db: List[Recipe],
             mutation_rate: float = 0.8
         ) -> None:
         """
@@ -287,20 +313,32 @@ class GA:
         
 
 
-    def _normalize(self, population: list[Recipe]) -> None:
+    def normalize(self, population: list[Recipe]) -> None:
         """
         
         """
         # TODO test
         for recipe in population:
-            recipe._normalize()
-        
+            recipe.normalize()
+
+
+    def sort_recipes(self, population: Recipe):
+        for recipe in population:
+            recipe.sort()
+
+
+    def print_recipes(self, recipes: Recipe):
+        # print(recipe)
+        for r in recipes:
+            print(r.evaluate())
+            print(r)
+
 
     def run(
             self, 
             epochs: int = 100,
-            population_size: int = 20,
-            selection_size: int = 10,
+            population_size: int = 1,
+            selection_size: int = 1,
             mut_delta: float = 1,
         ) -> list[Recipe]:
         """
@@ -319,28 +357,39 @@ class GA:
 
         # Initialize population
         population = self._init_population(population_size)
+        self.normalize(population)
 
         # Run algorithm
         for i in range(epochs):
             population = self._selection(population, selection_size)
-            population = self._crossover(population, population_size)
-            self._mutation(population)
-            self._normalize(population)
+
+            if population_size > 1:
+                population = self._crossover(population, population_size)
+
+            # Merge duplicate ingredient listings
+            for recipe in population:
+                recipe.merge_ingredients()
+
+            self.mutation(population)
+            self.normalize(population)
+            self.sort_recipes(population)
+            # self.print_recipes(population)
 
             if i % 10 == 0:
                 new_time = time.time()
                 print(
-                    f"Epoch {i}, Epoch time taken: {new_time - epoch_time}, " \
-                    f"Total time taken: {new_time - start_time}"
+                    f"Epoch {i}, Epoch time taken: {new_time - epoch_time:.4}, " \
+                    f"Total time taken: {new_time - start_time:.4}"
                 )
                 epoch_time = new_time
         
         print(
-            f"\nFinished:\n\tTotal time taken: {time.time() - start_time}\t" \
-            f"Number of epochs: {epochs}"
+            f"\nFinished:\n\tTotal time taken: {time.time() - start_time:.4}\t" \
+            f"Number of epochs: {epochs}\n"
         )
 
         # Select final recipes
+        self.print_recipes(population)
         return self._selection(population, population_size)
 
 
@@ -366,14 +415,14 @@ def main():
 
     # Parameters that tune the genetic algorithm
     num_ingredients = 3
-    population_size = 20    # Amount of created children each epoch (>2)
-    selection_size  = 10    # Amount of selected children to advance (>2)
+    population_size = 100    # Amount of created children each epoch (>2)
+    selection_size  = 20    # Amount of selected children to advance (>2)
     mut_delta  = 1          # TODO Not sure if needed
-    epochs = 100
+    epochs = 1000
 
     ga = GA(dataset)
     recipes = ga.run(epochs, population_size, selection_size, mut_delta)
-    for recipe in recipes:
-        print(recipe)
+    # for recipe in recipes:
+    #     recipe.
 if __name__ == "__main__":
     main()
