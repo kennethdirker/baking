@@ -9,14 +9,14 @@
     {
         "name": "White sugar",
         "taste": ["sweet"],
-        "moisture_level": 4,
+        "moisture_level": 2,
         "type": "sweetener",
         "intensity": 5
     },
     {
         "name": "Brown sugar",
         "taste": ["sweet"],
-        "moisture_level": 4,
+        "moisture_level": 2,
         "type": "sweetener",
         "intensity": 5
     },
@@ -177,7 +177,7 @@
     {
         "name": "Sugar",
         "taste": ["sweet"],
-        "moisture_level": 4,
+        "moisture_level": 2,
         "type": "sweetener",
         "intensity": 6
     },
@@ -191,7 +191,7 @@
     {
         "name": "Powdered sugar",
         "taste": ["sweet"],
-        "moisture_level": 4,
+        "moisture_level": 2,
         "type": "sweetener",
         "intensity": 4
     },
