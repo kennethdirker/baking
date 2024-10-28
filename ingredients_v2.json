@@ -25,7 +25,7 @@
         "taste": ["neutral"],
         "moisture_level": 7,
         "type": "binding agent",
-        "intensity": 1
+        "intensity": 3
     },
     {
         "name": "Vanilla extract",
@@ -46,7 +46,7 @@
         "taste": ["bitter", "chocolate"],
         "moisture_level": 0,
         "type": "flavoring",
-        "intensity": 6
+        "intensity": 7
     },
     {
         "name": "Baking soda",
@@ -67,14 +67,14 @@
         "taste": ["sweet", "creamy"],
         "moisture_level": 3,
         "type": "mix-in",
-        "intensity": 6
+        "intensity": 4
     },
     {
         "name": "Butter-flavored shortening",
         "taste": ["creamy"],
         "moisture_level": 5,
         "type": "fat",
-        "intensity": 6
+        "intensity": 5
     },
     {
         "name": "Pecans (chopped)",
@@ -127,7 +127,7 @@
     },
     {
         "name": "Ground cinnamon",
-        "taste": ["spicy, sweet"],
+        "taste": ["spicy", "sweet"],
         "moisture_level": 0,
         "type": "flavoring",
         "intensity": 10
@@ -144,7 +144,7 @@
         "taste": ["sweet", "fruity"],
         "moisture_level": 6,
         "type": "mix-in",
-        "intensity": 5
+        "intensity": 6
     },
     {
         "name": "Flaked coconut",
@@ -234,7 +234,7 @@
         "name": "Strawberry jam",
         "taste": ["sweet", "fruity"],
         "moisture_level": 7,
-        "type": "filling",
+        "type": "moisture agent",
         "intensity": 7
     },
     {
@@ -248,7 +248,7 @@
         "name": "German sweet chocolate",
         "taste": ["sweet", "chocolate"],
         "moisture_level": 3,
-        "type": "chocolate",
+        "type": "mix-in",
         "intensity": 6
     },
     {
