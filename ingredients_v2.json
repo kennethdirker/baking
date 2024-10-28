@@ -1,334 +1,332 @@
 {"cookie_ingredients": [
-    [
-        {
-            "name": "Butter",
-            "taste": "rich, creamy",
-            "moisture_level": 6,
-            "type": "fat",
-            "intensity": 4
-        },
-        {
-            "name": "White sugar",
-            "taste": "sweet",
-            "moisture_level": 4,
-            "type": "sweetener",
-            "intensity": 5
-        },
-        {
-            "name": "Brown sugar",
-            "taste": "sweet",
-            "moisture_level": 4,
-            "type": "sweetener",
-            "intensity": 5
-        },
-        {
-            "name": "Eggs",
-            "taste": "neutral",
-            "moisture_level": 7,
-            "type": "binding agent",
-            "intensity": 1
-        },
-        {
-            "name": "Vanilla extract",
-            "taste": "sweet, creamy, floral",
-            "moisture_level": 10,
-            "type": "flavoring",
-            "intensity": 10
-        },
-        {
-            "name": "All-purpose flour",
-            "taste": "neutral",
-            "moisture_level": 0,
-            "type": "dry ingredient",
-            "intensity": 1
-        },
-        {
-            "name": "Cocoa powder (unsweetened)",
-            "taste": "bitter, chocolate",
-            "moisture_level": 0,
-            "type": "flavoring",
-            "intensity": 8
-        },
-        {
-            "name": "Baking soda",
-            "taste": "bitter",
-            "moisture_level": 0,
-            "type": "raising agent",
-            "intensity": 2
-        },
-        {
-            "name": "Salt",
-            "taste": "salty",
-            "moisture_level": 4,
-            "type": "flavoring",
-            "intensity": 10
-        },
-        {
-            "name": "White chocolate chips",
-            "taste": "sweet, creamy",
-            "moisture_level": 3,
-            "type": "mix-in",
-            "intensity": 6
-        },
-        {
-            "name": "Butter-flavored shortening",
-            "taste": "creamy",
-            "moisture_level": 5,
-            "type": "fat",
-            "intensity": 6
-        },
-        {
-            "name": "Pecans (chopped)",
-            "taste": "nutty",
-            "moisture_level": 2,
-            "type": "mix-in",
-            "intensity": 5
-        },
-        {
-            "name": "Walnuts (chopped)",
-            "taste": "bitter, nutty",
-            "moisture_level": 2,
-            "type": "mix-in",
-            "intensity": 6
-        },
-        {
-            "name": "Margarine (softened)",
-            "taste": "buttery, mild",
-            "moisture_level": 7,
-            "type": "fat",
-            "intensity": 3
-        },
-        {
-            "name": "Maraschino cherries (chopped)",
-            "taste": "sweet, tart",
-            "moisture_level": 6,
-            "type": "mix-in",
-            "intensity": 6
-        },
-        {
-            "name": "Pistachios (chopped)",
-            "taste": "nutty, slightly sweet",
-            "moisture_level": 2,
-            "type": "mix-in",
-            "intensity": 5
-        },
-        {
-            "name": "Peppermint extract",
-            "taste": "fresh",
-            "moisture_level": 2,
-            "type": "flavoring",
-            "intensity": 10
-        },
-        {
-            "name": "Coffee-flavored liqueur",
-            "taste": "sweet, coffee",
-            "moisture_level": 10,
-            "type": "flavoring",
-            "intensity": 10
-        },
-        {
-            "name": "Ground cinnamon",
-            "taste": "spicy, sweet",
-            "moisture_level": 0,
-            "type": "flavoring",
-            "intensity": 10
-        },
-        {
-            "name": "Mini marshmallows",
-            "taste": "sweet, fluffy",
-            "moisture_level": 5,
-            "type": "mix-in",
-            "intensity": 5
-        },
-        {
-            "name": "Raisins",
-            "taste": "sweet, fruity",
-            "moisture_level": 6,
-            "type": "mix-in",
-            "intensity": 5
-        },
-        {
-            "name": "Flaked coconut",
-            "taste": "sweet, tropical",
-            "moisture_level": 3,
-            "type": "flavoring",
-            "intensity": 7
-        },
-        {
-            "name": "Quinoa flakes",
-            "taste": "nutty, mealy",
-            "moisture_level": 2,
-            "type": "mix-in",
-            "intensity": 4
-        },
-        {
-            "name": "Oat bran",
-            "taste": "nutty, mealy",
-            "moisture_level": 1,
-            "type": "dry ingredient",
-            "intensity": 4
-        },
-        {
-            "name": "Light cream",
-            "taste": "creamy",
-            "moisture_level": 7,
-            "type": "moisture agent",
-            "intensity": 7
-        },
-        {
-            "name": "Sugar",
-            "taste": "sweet",
-            "moisture_level": 4,
-            "type": "sweetener",
-            "intensity": 6
-        },
-        {
-            "name": "Cornstarch",
-            "taste": "mealy",
-            "moisture_level": 0,
-            "type": "binding agent",
-            "intensity": 3
-        },
-        {
-            "name": "Powdered sugar",
-            "taste": "sweet",
-            "moisture_level": 4,
-            "type": "sweetener",
-            "intensity": 6
-        },
-        {
-            "name": "Ground nutmeg",
-            "taste": "spicy",
-            "moisture_level": 0,
-            "type": "flavoring",
-            "intensity": 10
-        },
-        {
-            "name": "Fresh lemon juice",
-            "taste": "tangy, fruity, fresh",
-            "moisture_level": 10,
-            "type": "flavoring",
-            "intensity": 10
-        },
-        {
-            "name": "Orange liqueur",
-            "taste": "sweet, fruity",
-            "moisture_level": 10,
-            "type": "flavoring",
-            "intensity": 10
-        },
-        {
-            "name": "Maple flavored extract",
-            "taste": "sweet, floral",
-            "moisture_level": 1,
-            "type": "flavoring",
-            "intensity": 9
-        },
-        {
-            "name": "Granola (with nuts and raisins)",
-            "taste": "sweet, nutty, flavoring",
-            "moisture_level": 2,
-            "type": "mix-in",
-            "intensity": 5
-        },
-        {
-            "name": "Strawberry jam",
-            "taste": "sweet, fruity",
-            "moisture_level": 7,
-            "type": "filling",
-            "intensity": 7
-        },
-        {
-            "name": "Instant hot chocolate mix",
-            "taste": "chocolate",
-            "moisture_level": 1,
-            "type": "dry ingredient",
-            "intensity": 8
-        },
-        {
-            "name": "German sweet chocolate",
-            "taste": "sweet, chocolate",
-            "moisture_level": 3,
-            "type": "chocolate",
-            "intensity": 6
-        },
-        {
-            "name": "Milk chocolate chips",
-            "taste": "sweet, chocolate",
-            "moisture_level": 3,
-            "type": "mix-in",
-            "intensity": 6
-        },
-        {
-            "name": "Almonds (chopped)",
-            "taste": "nutty",
-            "moisture_level": 2,
-            "type": "mix-in",
-            "intensity": 4
-        },
-        {
-            "name": "Mashed avocado",
-            "taste": "creamy, fresh",
-            "moisture_level": 7,
-            "type": "fat",
-            "intensity": 6
-        },
-        {
-            "name": "Matzo cake meal",
-            "taste": "mealy",
-            "moisture_level": 0,
-            "type": "dry ingredient",
-            "intensity": 3
-        },
-        {
-            "name": "Potato starch",
-            "taste": "mealy",
-            "moisture_level": 0,
-            "type": "dry ingredient",
-            "intensity": 3
-        },
-        {
-            "name": "Applesauce",
-            "taste": "sweet, fruity",
-            "moisture_level": 8,
-            "type": "moisture agent",
-            "intensity": 6
-        },
-        {
-            "name": "Rolled oats",
-            "taste": "mealy",
-            "moisture_level": 2,
-            "type": "mix-in",
-            "intensity": 5
-        },
-        {
-            "name": "Honey",
-            "taste": "sweet, floral",
-            "moisture_level": 5,
-            "type": "sweetener",
-            "intensity": 6
-        },
-        {
-            "name": "Plain nonfat yogurt",
-            "taste": "tangy",
-            "moisture_level": 7,
-            "type": "moisture agent",
-            "intensity": 4
-        },
-        {
-            "name": "Milk",
-            "taste": "creamy, sweet",
-            "moisture_level": 10,
-            "type": "moisture agent",
-            "intensity": 2
-        },
-        {
-            "name": "Water",
-            "taste": "neutral",
-            "moisture_level": 10,
-            "type": "moisture agent",
-            "intensity": 0
-        }               
-    ]   
-]
+    {
+        "name": "Butter",
+        "taste": "rich, creamy",
+        "moisture_level": 6,
+        "type": "fat",
+        "intensity": 4
+    },
+    {
+        "name": "White sugar",
+        "taste": "sweet",
+        "moisture_level": 4,
+        "type": "sweetener",
+        "intensity": 5
+    },
+    {
+        "name": "Brown sugar",
+        "taste": "sweet",
+        "moisture_level": 4,
+        "type": "sweetener",
+        "intensity": 5
+    },
+    {
+        "name": "Eggs",
+        "taste": "neutral",
+        "moisture_level": 7,
+        "type": "binding agent",
+        "intensity": 1
+    },
+    {
+        "name": "Vanilla extract",
+        "taste": "sweet, creamy, floral",
+        "moisture_level": 10,
+        "type": "flavoring",
+        "intensity": 10
+    },
+    {
+        "name": "All-purpose flour",
+        "taste": "neutral",
+        "moisture_level": 0,
+        "type": "dry ingredient",
+        "intensity": 1
+    },
+    {
+        "name": "Cocoa powder (unsweetened)",
+        "taste": "bitter, chocolate",
+        "moisture_level": 0,
+        "type": "flavoring",
+        "intensity": 8
+    },
+    {
+        "name": "Baking soda",
+        "taste": "bitter",
+        "moisture_level": 0,
+        "type": "raising agent",
+        "intensity": 2
+    },
+    {
+        "name": "Salt",
+        "taste": "salty",
+        "moisture_level": 4,
+        "type": "flavoring",
+        "intensity": 10
+    },
+    {
+        "name": "White chocolate chips",
+        "taste": "sweet, creamy",
+        "moisture_level": 3,
+        "type": "mix-in",
+        "intensity": 6
+    },
+    {
+        "name": "Butter-flavored shortening",
+        "taste": "creamy",
+        "moisture_level": 5,
+        "type": "fat",
+        "intensity": 6
+    },
+    {
+        "name": "Pecans (chopped)",
+        "taste": "nutty",
+        "moisture_level": 2,
+        "type": "mix-in",
+        "intensity": 5
+    },
+    {
+        "name": "Walnuts (chopped)",
+        "taste": "bitter, nutty",
+        "moisture_level": 2,
+        "type": "mix-in",
+        "intensity": 6
+    },
+    {
+        "name": "Margarine (softened)",
+        "taste": "buttery, mild",
+        "moisture_level": 7,
+        "type": "fat",
+        "intensity": 3
+    },
+    {
+        "name": "Maraschino cherries (chopped)",
+        "taste": "sweet, tart",
+        "moisture_level": 6,
+        "type": "mix-in",
+        "intensity": 6
+    },
+    {
+        "name": "Pistachios (chopped)",
+        "taste": "nutty, slightly sweet",
+        "moisture_level": 2,
+        "type": "mix-in",
+        "intensity": 5
+    },
+    {
+        "name": "Peppermint extract",
+        "taste": "fresh",
+        "moisture_level": 2,
+        "type": "flavoring",
+        "intensity": 10
+    },
+    {
+        "name": "Coffee-flavored liqueur",
+        "taste": "sweet, coffee",
+        "moisture_level": 10,
+        "type": "flavoring",
+        "intensity": 10
+    },
+    {
+        "name": "Ground cinnamon",
+        "taste": "spicy, sweet",
+        "moisture_level": 0,
+        "type": "flavoring",
+        "intensity": 10
+    },
+    {
+        "name": "Mini marshmallows",
+        "taste": "sweet, fluffy",
+        "moisture_level": 5,
+        "type": "mix-in",
+        "intensity": 5
+    },
+    {
+        "name": "Raisins",
+        "taste": "sweet, fruity",
+        "moisture_level": 6,
+        "type": "mix-in",
+        "intensity": 5
+    },
+    {
+        "name": "Flaked coconut",
+        "taste": "sweet, tropical",
+        "moisture_level": 3,
+        "type": "flavoring",
+        "intensity": 7
+    },
+    {
+        "name": "Quinoa flakes",
+        "taste": "nutty, mealy",
+        "moisture_level": 2,
+        "type": "mix-in",
+        "intensity": 4
+    },
+    {
+        "name": "Oat bran",
+        "taste": "nutty, mealy",
+        "moisture_level": 1,
+        "type": "dry ingredient",
+        "intensity": 4
+    },
+    {
+        "name": "Light cream",
+        "taste": "creamy",
+        "moisture_level": 7,
+        "type": "moisture agent",
+        "intensity": 7
+    },
+    {
+        "name": "Sugar",
+        "taste": "sweet",
+        "moisture_level": 4,
+        "type": "sweetener",
+        "intensity": 6
+    },
+    {
+        "name": "Cornstarch",
+        "taste": "mealy",
+        "moisture_level": 0,
+        "type": "binding agent",
+        "intensity": 3
+    },
+    {
+        "name": "Powdered sugar",
+        "taste": "sweet",
+        "moisture_level": 4,
+        "type": "sweetener",
+        "intensity": 6
+    },
+    {
+        "name": "Ground nutmeg",
+        "taste": "spicy",
+        "moisture_level": 0,
+        "type": "flavoring",
+        "intensity": 10
+    },
+    {
+        "name": "Fresh lemon juice",
+        "taste": "tangy, fruity, fresh",
+        "moisture_level": 10,
+        "type": "flavoring",
+        "intensity": 10
+    },
+    {
+        "name": "Orange liqueur",
+        "taste": "sweet, fruity",
+        "moisture_level": 10,
+        "type": "flavoring",
+        "intensity": 10
+    },
+    {
+        "name": "Maple flavored extract",
+        "taste": "sweet, floral",
+        "moisture_level": 1,
+        "type": "flavoring",
+        "intensity": 9
+    },
+    {
+        "name": "Granola (with nuts and raisins)",
+        "taste": "sweet, nutty, flavoring",
+        "moisture_level": 2,
+        "type": "mix-in",
+        "intensity": 5
+    },
+    {
+        "name": "Strawberry jam",
+        "taste": "sweet, fruity",
+        "moisture_level": 7,
+        "type": "filling",
+        "intensity": 7
+    },
+    {
+        "name": "Instant hot chocolate mix",
+        "taste": "chocolate",
+        "moisture_level": 1,
+        "type": "dry ingredient",
+        "intensity": 8
+    },
+    {
+        "name": "German sweet chocolate",
+        "taste": "sweet, chocolate",
+        "moisture_level": 3,
+        "type": "chocolate",
+        "intensity": 6
+    },
+    {
+        "name": "Milk chocolate chips",
+        "taste": "sweet, chocolate",
+        "moisture_level": 3,
+        "type": "mix-in",
+        "intensity": 6
+    },
+    {
+        "name": "Almonds (chopped)",
+        "taste": "nutty",
+        "moisture_level": 2,
+        "type": "mix-in",
+        "intensity": 4
+    },
+    {
+        "name": "Mashed avocado",
+        "taste": "creamy, fresh",
+        "moisture_level": 7,
+        "type": "fat",
+        "intensity": 6
+    },
+    {
+        "name": "Matzo cake meal",
+        "taste": "mealy",
+        "moisture_level": 0,
+        "type": "dry ingredient",
+        "intensity": 3
+    },
+    {
+        "name": "Potato starch",
+        "taste": "mealy",
+        "moisture_level": 0,
+        "type": "dry ingredient",
+        "intensity": 3
+    },
+    {
+        "name": "Applesauce",
+        "taste": "sweet, fruity",
+        "moisture_level": 8,
+        "type": "moisture agent",
+        "intensity": 6
+    },
+    {
+        "name": "Rolled oats",
+        "taste": "mealy",
+        "moisture_level": 2,
+        "type": "mix-in",
+        "intensity": 5
+    },
+    {
+        "name": "Honey",
+        "taste": "sweet, floral",
+        "moisture_level": 5,
+        "type": "sweetener",
+        "intensity": 6
+    },
+    {
+        "name": "Plain nonfat yogurt",
+        "taste": "tangy",
+        "moisture_level": 7,
+        "type": "moisture agent",
+        "intensity": 4
+    },
+    {
+        "name": "Milk",
+        "taste": "creamy, sweet",
+        "moisture_level": 10,
+        "type": "moisture agent",
+        "intensity": 2
+    },
+    {
+        "name": "Water",
+        "taste": "neutral",
+        "moisture_level": 10,
+        "type": "moisture agent",
+        "intensity": 0
+    }               
+]   
 }
