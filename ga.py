@@ -44,7 +44,7 @@ class Ingredient:
             quantity:   float = -1,
             unit:       str = "g",
             moistness:  float = -1,
-            taste:      List[str] = "",
+            taste:      List[str] = "", # Sadly enough, not used
             function_:  str = "",
             intensity:  float = -1,
         ):
@@ -57,7 +57,7 @@ class Ingredient:
         self.moistness: float = moistness   # Desert - [0:10] - Ocean
         self.taste: str = taste             # Salty, bitter, etc...
         self.function_: str = function_     # Function of ingredient
-        self.intensity: float = intensity   # Weak taste - [0:10] - Strong taste
+        self.intensity: float = intensity   # Weak taste - [0:20] - Strong taste
 
 
     def mutate(self, delta: float = 1):
