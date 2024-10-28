@@ -180,12 +180,6 @@ class Recipe:
 
         Return a moistness score in the range: Desert - [0:10] - Ocean
         """
-        # moistness = 0      # Desert - [0:10] - Ocean
-        # parts = [(i.quantity / 1000, i.moistness) for i in self.ingredients]
-        # for p in parts:
-        #     moistness += p[0] * p[1]
-        # print(f"moistness: {moistness}")
-        # return moistness
         return sum([i.quantity * i.moistness / 1000 for i in self.ingredients])
 
     def _intensity(self) -> float:
@@ -195,11 +189,6 @@ class Recipe:
 
         Return a intensity score in the range: Water - [0:10] - Pure salt
         """
-        # intensity = 0      # Water - [0:10] - Pure salt
-        # parts = [(i.quantity / 1000, i.intensity) for i in self.ingredients]
-        # for p in parts:
-            # intensity += p[0] * p[1]
-        # return intensity
         return sum([i.quantity * i.intensity / 1000 for i in self.ingredients])
 
 
@@ -209,7 +198,7 @@ class Recipe:
 
     def normalize(self) -> None:
         """
-        Normalize
+        Normalize the recipe to contain 1000g of ingredients.
         """
         # NOTE: Assumes that all measures are in grams/milliliters!!!!
         # Calculate total mass of recipe
@@ -244,23 +233,34 @@ class Recipe:
 
 
         Returns the fitness as a positive float.
-        """
+        """ 
+        # Count which functions are present in the recipe
+        functions = {}
+        for i in self.ingredients:
+            if i.function_ not in functions:
+                functions[i.function_] = True
+
+        m = self._moistness() 
+        i = self._intensity()
+
         fitness = 0
         fitness += 2 ** abs(self._moistness() - 4)    # TODO Scaling
         fitness += 2 ** abs(self._intensity() - 5)    # TODO Scaling
         fitness += 2 ** (len(INGREDIENT_FUNCTIONS) - len(functions))
 
+        print(f"Moistness: {m}, Intensity: {i}")
         return fitness
 
 
 class GA:
+    """
+    Class responsible for executing a genetic algorithm to discover cookie
+    recipes!
+    """
     def __init__(
             self,
             database: List[Ingredient]
         ):
-        """
-        
-        """
         self.population: List[Recipe] = []
         self.database = database
 
@@ -285,6 +285,7 @@ class GA:
 
         return population
 
+
     def _selection(
             self, 
             population: List[Recipe],
@@ -296,7 +297,6 @@ class GA:
 
         Returns a list with the fittest recipe population.
         """
-        # TODO Do we need ascending or decending????
         evals = [(recipe.evaluate() , recipe) for recipe in population]
         evals.sort(key=lambda tup: tup[0], reverse=False)
         return [x[1] for x in evals[:selection_size]]
@@ -342,7 +342,7 @@ class GA:
         return children
 
 
-    def mutation(
+    def _mutation(
             self, 
             population: List[Recipe], 
             mutation_rate: float = 0.8
@@ -358,7 +358,7 @@ class GA:
         
 
 
-    def normalize(self, population: list[Recipe]) -> None:
+    def _normalize(self, population: list[Recipe]) -> None:
         """
         Normalize all recipes to each weigh 1 kg.
 
@@ -380,7 +380,7 @@ class GA:
 
     def print_recipes(self, recipes: Recipe):
         for r in recipes:
-            print(r.evaluate())
+            print(f"fitness: {r.evaluate():.4}")
             print(r)
 
 
@@ -407,7 +407,7 @@ class GA:
 
         # Initialize population
         population = self._init_population(population_size, num_ingredients)
-        self.normalize(population)
+        self._normalize(population)
 
         # Run algorithm
         for i in range(epochs):
@@ -420,10 +420,9 @@ class GA:
             for recipe in population:
                 recipe.merge_ingredients()
 
-            self.mutation(population)
-            self.normalize(population)
+            self._mutation(population)
+            self._normalize(population)
             self.sort_recipes(population)
-            # self.print_recipes(population)
 
             if i + 1 % 10 == 0:
                 new_time = time.time()
@@ -431,7 +430,6 @@ class GA:
                     f"Epoch {i}, Epoch time taken: {new_time - epoch_time:.4}, " \
                     f"Total time taken: {new_time - start_time:.4}"
                 )
-                # self.print_recipes(population)
                 epoch_time = new_time
         
         print(
@@ -467,8 +465,6 @@ def main():
 
         ga = GA(dataset)
         recipes = ga.run(epochs, population_size, selection_size)
-        # for recipe in recipes:
-        #     recipe.
 
 if __name__ == "__main__":
     main()
