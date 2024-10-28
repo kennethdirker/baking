@@ -187,7 +187,7 @@ class Recipe:
         Calculate how intense the taste of the resulting mesh of ingredients 
         might be.
 
-        Return a intensity score in the range: Water - [0:10] - Pure salt
+        Return a intensity score in the range: Water - [0:20] - very very strong
         """
         return sum([i.quantity * i.intensity / 1000 for i in self.ingredients])
 
@@ -216,7 +216,7 @@ class Recipe:
             
 
 
-    def evaluate(self) -> float:
+    def evaluate(self, verbose = False) -> float:
         """
         Calculate the fitness of the recipe. The fitness is a positive,
         where a good recipe closes to 0. Evaluation is based on:
@@ -244,11 +244,12 @@ class Recipe:
         i = self._intensity()
 
         fitness = 0
-        fitness += 2 ** abs(self._moistness() - 4)    # TODO Scaling
-        fitness += 2 ** abs(self._intensity() - 5)    # TODO Scaling
+        fitness += 2 ** abs(self._moistness() - 4.5)    # TODO Scaling
+        fitness += 4 ** abs(self._intensity() - 4)    # TODO Scaling
         fitness += 2 ** (len(INGREDIENT_FUNCTIONS) - len(functions))
 
-        print(f"Moistness: {m}, Intensity: {i}")
+        if verbose:
+            print(f"Moistness: {m}, Intensity: {i}")
         return fitness
 
 
@@ -380,7 +381,7 @@ class GA:
 
     def print_recipes(self, recipes: Recipe):
         for r in recipes:
-            print(f"fitness: {r.evaluate():.4}")
+            print(f"fitness: {r.evaluate(verbose=True):.4}")
             print(r)
 
 
@@ -443,7 +444,7 @@ class GA:
         return population
 
 def main():
-    with open("ingredients_v2.json") as json_file:
+    with open("ingredients_v3.json") as json_file:
         data = json.load(json_file)
         dataset = []
 
@@ -461,7 +462,7 @@ def main():
         num_ingredients = 5
         population_size = 100    # Amount of created children each epoch (>2)
         selection_size  = 20    # Amount of selected children to advance (>2)
-        epochs = 10
+        epochs = 100
 
         ga = GA(dataset)
         recipes = ga.run(epochs, population_size, selection_size)
